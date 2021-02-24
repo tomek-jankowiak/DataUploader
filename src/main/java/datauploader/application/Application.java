@@ -12,7 +12,7 @@ public class Application {
     ProductStorage productStorage = new ProductStorage(inputPath);
     try {
       productStorage.loadProducts();
-      System.out.println(productStorage.toString());
+      productStorage.writeToJSON(destinationPath);
     } catch (IOException ex) {
       ex.printStackTrace();
     }

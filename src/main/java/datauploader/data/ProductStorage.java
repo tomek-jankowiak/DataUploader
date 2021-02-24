@@ -3,7 +3,10 @@ package datauploader.data;
 import datauploader.logic.CSVFileReader;
 import datauploader.logic.IFileReader;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -37,6 +40,11 @@ public class ProductStorage {
         }
       }
     }
+  }
+
+  public void writeToJSON(String destination) throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+    objectMapper.writeValue(new File(destination), productList);
   }
 
   public String toString() {

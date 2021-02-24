@@ -18,6 +18,22 @@ public class Product {
     this.simpleAttributes = attributes;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public String getIdentifier() {
+    return identifier;
+  }
+
+  public Map<String, Object> getSimpleAttributes() {
+    return simpleAttributes;
+  }
+
   public String toString() {
     StringBuilder str = new StringBuilder();
     str.append(String.format("type: %s\n", type));
