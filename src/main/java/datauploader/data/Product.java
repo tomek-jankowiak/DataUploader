@@ -16,6 +16,19 @@ public class Product {
     this.key = key;
     this.identifier = identifier;
     this.simpleAttributes = attributes;
+  }
 
+  public String toString() {
+    StringBuilder str = new StringBuilder();
+    str.append(String.format("type: %s\n", type));
+    str.append(String.format("key: %s\n", key));
+    str.append(String.format("identifier: %s\n", identifier));
+    str.append("attributes: {\n");
+    for (String key : simpleAttributes.keySet()) {
+      str.append(String.format("\t%s: %s\n", key, simpleAttributes.get(key)));
+    }
+    str.append("}\n");
+
+    return str.toString();
   }
 }
