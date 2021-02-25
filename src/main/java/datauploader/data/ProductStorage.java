@@ -5,6 +5,8 @@ import datauploader.logic.IFileReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import datauploader.logic.XMLFileReader;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -29,6 +31,7 @@ public class ProductStorage {
       while ((filepath = bufferedReader.readLine()) != null) {
         switch (filepath.split("\\.")[1].toLowerCase()) {
           case "csv" -> fileReader = new CSVFileReader(filepath);
+          case "xml" -> fileReader = new XMLFileReader(filepath);
           default -> {
             fileReader = null;
             System.out.println("Unsupported file format!\n" + String.format("File omitted (%s)", filepath));

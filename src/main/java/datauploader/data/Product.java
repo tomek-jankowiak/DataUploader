@@ -8,6 +8,9 @@ public class Product {
   private String identifier;
   private Map<String, Object> simpleAttributes;
 
+  public Product() {
+  }
+
   public Product(String type,
                  String key,
                  String identifier,
@@ -32,6 +35,22 @@ public class Product {
 
   public Map<String, Object> getSimpleAttributes() {
     return simpleAttributes;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public void setIdentifier(String identifier) {
+    this.identifier = identifier;
+  }
+
+  public void setSimpleAttributes(Map<String, Object> simpleAttributes) {
+    this.simpleAttributes = simpleAttributes;
   }
 
   public String toString() {
