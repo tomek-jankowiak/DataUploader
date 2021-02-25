@@ -1,6 +1,6 @@
 package datauploader.application;
 
-import datauploader.data.ProductStorage;
+import datauploader.data.ElementStorage;
 
 import java.io.IOException;
 
@@ -9,10 +9,10 @@ public class Application {
     String inputPath = args[0];
     String destinationPath = args[1];
 
-    ProductStorage productStorage = new ProductStorage(inputPath);
+    ElementStorage elementStorage = new ElementStorage(inputPath);
     try {
-      productStorage.loadProducts();
-      productStorage.writeToJSON(destinationPath);
+      elementStorage.loadProducts();
+      elementStorage.writeToJSON(destinationPath);
     } catch (IOException ex) {
       ex.printStackTrace();
     }

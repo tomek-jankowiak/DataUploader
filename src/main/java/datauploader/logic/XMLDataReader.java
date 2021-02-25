@@ -1,6 +1,6 @@
 package datauploader.logic;
 
-import datauploader.data.Product;
+import datauploader.data.Element;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -15,29 +15,29 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class XMLFileReader extends DefaultHandler implements IFileReader {
+public class XMLDataReader extends DefaultHandler implements DataReader {
   private final String filepath;
-  private final List<Product> productList;
-  private Product product;
+  private final List<Element> elementList;
+  private Element element;
   private Map<String, Object> productAttributes;
   private StringBuilder data;
   private boolean bIdentifier;
   private boolean bParameters;
 
-  public XMLFileReader(String filepath) {
+  public XMLDataReader(String filepath) {
     this.filepath = filepath;
-    this.productList = new LinkedList<>();
+    this.elementList = new LinkedList<>();
     this.bIdentifier = false;
     this.bParameters = false;
   }
 
   @Override
-  public List<Product> readFile() throws IOException {
+  public List<Element> readFile() throws IOException {
     SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
     try {
       SAXParser saxParser = saxParserFactory.newSAXParser();
       saxParser.parse(new File(filepath), this);
-      return productList;
+      return elementList;
     } catch (SAXException | ParserConfigurationException e) {
       throw new IOException();
     }
@@ -48,9 +48,9 @@ public class XMLFileReader extends DefaultHandler implements IFileReader {
     if (qName.equalsIgnoreCase("produkt")) {
       String type = attributes.getValue("typ");
       String key = attributes.getValue("klucz");
-      product = new Product();
-      product.setType(type);
-      product.setKey(key);
+      element = new Element();
+      element.setType(type);
+      element.setKey(key);
     } else if (qName.equalsIgnoreCase("identyfikator")) {
       bIdentifier = true;
     } else if (qName.equalsIgnoreCase("parametry")) {
@@ -63,10 +63,10 @@ public class XMLFileReader extends DefaultHandler implements IFileReader {
   @Override
   public void endElement(String uri, String localName, String qName) {
     if (qName.equalsIgnoreCase("produkt")) {
-      product.setSimpleAttributes(productAttributes);
-      productList.add(product);
+      element.setSimpleAttributes(productAttributes);
+      elementList.add(element);
     } else if (bIdentifier) {
-      product.setIdentifier(data.toString());
+      element.setIdentifier(data.toString());
       bIdentifier = false;
     } else if (qName.equalsIgnoreCase("parametry")) {
       bParameters = false;

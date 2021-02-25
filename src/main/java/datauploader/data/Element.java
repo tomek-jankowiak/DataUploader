@@ -2,16 +2,16 @@ package datauploader.data;
 
 import java.util.Map;
 
-public class Product {
+public class Element {
   private String type;
   private String key;
   private String identifier;
   private Map<String, Object> simpleAttributes;
 
-  public Product() {
+  public Element() {
   }
 
-  public Product(String type,
+  public Element(String type,
                  String key,
                  String identifier,
                  Map<String, Object> attributes) {

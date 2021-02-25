@@ -1,6 +1,6 @@
 package datauploader.logic;
 
-import datauploader.data.Product;
+import datauploader.data.Element;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,18 +10,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class CSVFileReader implements IFileReader {
+public class CSVDataReader implements DataReader {
   private final String filepath;
   private final static String SEPARATOR = ";";
 
-  public CSVFileReader(String filepath) {
+  public CSVDataReader(String filepath) {
     this.filepath = filepath;
   }
 
   @Override
-  public List<Product> readFile() throws IOException {
+  public List<Element> readFile() throws IOException {
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath))) {
-      List<Product> productList = new LinkedList<>();
+      List<Element> elementList = new LinkedList<>();
       String fileline;
       String[] colNames = bufferedReader.readLine().split(SEPARATOR);
 
@@ -35,10 +35,10 @@ public class CSVFileReader implements IFileReader {
           attributes.put(colNames[i], values[i]);
         }
 
-        productList.add(new Product(type, key, identifier, attributes));
+        elementList.add(new Element(type, key, identifier, attributes));
       }
 
-      return productList;
+      return elementList;
     }
   }
 }
